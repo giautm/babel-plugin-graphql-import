@@ -1,8 +1,8 @@
 {
-  "name": "babel-plugin-inline-import",
-  "version": "2.0.5",
-  "description": "Babel plugin to make raw files importable",
-  "author": "Victor Duarte (Quadric ApS) <contact@quadric.net>",
+  "name": "babel-plugin-graphql-import",
+  "version": "1.0.0",
+  "description": "Babel plugin to make graphql files importable",
+  "author": "Giau. Tran Minh <giau.tmg@gmail.com>",
   "license": "MIT",
   "main": "build/index.js",
   "files": [
@@ -11,31 +11,33 @@
   "keywords": [
     "babel-plugin",
     "graphql",
-    "raw",
     "extension",
     "wrap",
     "import",
-    "inline"
+    "graphql-import"
   ],
-  "repository": "Quadric/babel-plugin-inline-import",
+  "repository": "giautm/babel-plugin-graphql-import",
   "scripts": {
-    "test": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register",
-    "test-watch": "mocha test/*.spec.js --require config/mocha.js --compilers js:babel-core/register --watch",
+    "test": "jest",
+    "test-watch": "jest --watch",
     "lint-js": "eslint plugin",
     "prepare": "babel -d build/ plugin/"
   },
   "dependencies": {
+    "graphql-import": "0.1.9",
     "require-resolve": "0.0.2"
   },
   "devDependencies": {
-    "babel-cli": "6.x.x",
-    "babel-core": "^6.14.0",
-    "babel-eslint": "^6.1.2",
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-eslint": "6.1.2",
+    "babel-jest": "22.0.4",
     "babel-preset-es2015-without-strict": "0.0.4",
-    "babel-preset-stage-1": "^6.13.0",
-    "chai": "^3.5.0",
-    "eslint": "^3.4.0",
-    "mocha": "^3.0.2",
-    "sinon": "^1.17.5"
+    "babel-preset-stage-1": "6.24.1",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jest": "21.5.0",
+    "jest": "22.0.4"
   }
 }

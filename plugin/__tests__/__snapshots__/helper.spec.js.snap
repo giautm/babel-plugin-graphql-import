@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Babel GraphQL Import - Helper getContents returns file content 1`] = `
+"type Object {
+  hello: String
+}
+"
+`;

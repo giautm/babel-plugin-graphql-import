@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Babel GraphQL Import - Plugin Babel Plugin accepts different extensions 1`] = `"/* babel-plugin-graphql-import './fixtures/example.gql-v2' */var SomeExample = 'type Object {\\\\n  hello: String\\\\n}\\\\n';"`;
+
+exports[`Babel GraphQL Import - Plugin Babel Plugin transforms the import statement into a variable with the intended content 1`] = `"/* babel-plugin-graphql-import './fixtures/example.graphql' */var SomeExample = 'type Object {\\\\n  hello: String\\\\n}\\\\n';"`;

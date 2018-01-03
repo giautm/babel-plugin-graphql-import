@@ -1,10 +1,10 @@
-# Babel Inline Import [![Build Status](https://travis-ci.org/Quadric/babel-plugin-inline-import.svg?branch=master)](https://travis-ci.org/Quadric/babel-plugin-inline-import)
+# Babel GraphQL Import
 Babel plugin to add the opportunity to use `import` with raw/literal content<br>
 It is good e.g. for importing `*.graphql` files into your code.
 
 ## Examples
 
-Before (without Babel-Inline-Import):
+Before (without Babel-GraphQL-Import):
 ```javascript
 // server.js
 
@@ -24,7 +24,7 @@ graphQLServer({
 });
 ```
 
-Now (with Babel-Inline-Import):
+Now (with Babel-GraphQL-Import):
 ```javascript
 // /some/schema.graphql
 type Query {
@@ -49,7 +49,7 @@ graphQLServer({
 
 ## Install
 ```
-npm install babel-plugin-inline-import --save-dev
+npm install babel-plugin-graphql-import --save-dev
 ```
 
 ## Use
@@ -57,20 +57,19 @@ Add a `.babelrc` file and write:
 ```javascript
 {
   "plugins": [
-    "babel-plugin-inline-import"
+    "babel-plugin-graphql-import"
   ]
 }
 ```
 or pass the plugin with the plugins-flag on CLI
 ```
-babel-node myfile.js --plugins babel-plugin-inline-import
+babel-node myfile.js --plugins babel-plugin-graphql-import
 ```
 
-By default, Babel-Inline-Import is compatible with the following file extensions:
+By default, Babel-GraphQL-Import is compatible with the following file extensions:
 
-* .raw
-* .text
 * .graphql
+* .gql
 
 
 ## Customize
@@ -78,7 +77,7 @@ If you want to enable different file extensions, you can define them in your `.b
 ```javascript
 {
   "plugins": [
-    ["babel-plugin-inline-import", {
+    ["babel-plugin-graphql-import", {
       "extensions": [
         ".json",
         ".sql"

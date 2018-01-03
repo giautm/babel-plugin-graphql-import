@@ -1,20 +1,17 @@
-import fs from 'fs';
 import path from 'path';
 import requireResolve from 'require-resolve';
+import { importSchema } from 'graphql-import';
 
-export default class BabelInlineImportHelper {
+export default class BabelGraphQLImportHelper {
   static extensions = [
-    '.raw',
-    '.text',
     '.graphql',
+    '.gql',
   ];
-
-  static root = global.rootPath || process.cwd();
 
   static shouldBeInlined(givenPath, extensions) {
     const accept = (typeof extensions === 'string')
       ? [extensions]
-      : (extensions || BabelInlineImportHelper.extensions);
+      : (extensions || BabelGraphQLImportHelper.extensions);
 
     for (const extension of accept) {
       if (givenPath.endsWith(extension)) {
@@ -36,25 +33,6 @@ export default class BabelInlineImportHelper {
       throw new Error(`Path '${givenPath}' could not be found for '${reference}'`);
     }
 
-    return fs.readFileSync(mod.src).toString();
-  }
-
-  static transformRelativeToRootPath(path, rootPathSuffix) {
-    if (this.hasRoot(path)) {
-      const withoutRoot = path.substring(1, path.length);
-      return `${BabelInlineImportHelper.root}${rootPathSuffix || ''}/${withoutRoot}`;
-    }
-    if (typeof path === 'string') {
-      return path;
-    }
-    throw new Error('ERROR: No path passed');
-  }
-
-  static hasRoot(string) {
-    if (typeof string !== 'string') {
-      return false;
-    }
-
-    return string.substring(0, 1) === '/';
+    return importSchema(mod.src);
   }
 }
