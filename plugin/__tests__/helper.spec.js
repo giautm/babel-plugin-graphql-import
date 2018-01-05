@@ -9,6 +9,11 @@ describe('Babel GraphQL Import - Helper', () => {
         '.gql',
       ]);
     });
+
+    it('returns the root path', () => {
+      const rootByProcess = process.cwd();
+      expect(BabelGraphQLImportHelper.root).toBe(rootByProcess);
+    });
   });
 
   describe('shouldBeInlined', () => {
@@ -35,7 +40,7 @@ describe('Babel GraphQL Import - Helper', () => {
       it('throws error if no array or string is passed as extensions', () => {
         expect(() => {
           BabelGraphQLImportHelper.shouldBeInlined('example.raw', true);
-        }).toThrowError(Error);
+        }).toThrow(Error);
       });
   });
 
@@ -43,17 +48,58 @@ describe('Babel GraphQL Import - Helper', () => {
     it('throws error if no reference is specified', () => {
       expect(() => {
         BabelGraphQLImportHelper.getContents('./fixtures/example.raw');
-      }).toThrowError(Error);
+      }).toThrow(Error);
     });
 
     it('throws error if file does not exist', () => {
       expect(() => {
         BabelGraphQLImportHelper.getContents('non_existent.raw', __filename);
-      }).toThrowError(Error);
+      }).toThrow(Error);
     });
 
     it('returns file content', () => {
       expect(BabelGraphQLImportHelper.getContents('./fixtures/example.graphql', __filename)).toMatchSnapshot();
+    });
+  });
+
+  describe('transformRelativeToRootPath', () => {
+    it('returns a string', () => {
+      const func = BabelGraphQLImportHelper.transformRelativeToRootPath('');
+      expect(typeof func).toBe('string');
+    });
+
+    it('transforms given path relative root-path', () => {
+      const rootPath = `${process.cwd()}/some/path`;
+      const result = BabelGraphQLImportHelper.transformRelativeToRootPath('/some/path');
+      expect(result).toEqual(rootPath);
+    });
+
+    it('throws error if no string is passed', () => {
+      expect(() => {
+        BabelGraphQLImportHelper.transformRelativeToRootPath();
+      }).toThrow(Error);
+    });
+  });
+
+
+  describe('hasRoot', () => {
+    it('returns a boolean', () => {
+      const func = BabelGraphQLImportHelper.hasRoot();
+      expect(typeof func).toBe('boolean');
+    });
+
+    it('check if the string has "/" at the beginning', () => {
+      const withRoot = BabelGraphQLImportHelper.hasRoot('/path');
+      const withoutRoot = BabelGraphQLImportHelper.hasRoot('./some/path');
+      expect(withoutRoot).toBe(false);
+      expect(withRoot).toBe(true);
+    });
+
+    it('returns false if no string passed', () => {
+      const nothingPassed = BabelGraphQLImportHelper.hasRoot();
+      const wrongTypePassed = BabelGraphQLImportHelper.hasRoot([]);
+      expect(nothingPassed).toBe(false);
+      expect(wrongTypePassed).toBe(false);
     });
   });
 });

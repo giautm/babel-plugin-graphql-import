@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-graphql-import",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Babel plugin to make graphql files importable",
   "author": "Giau. Tran Minh <giau.tmg@gmail.com>",
   "license": "MIT",
@@ -21,7 +21,13 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "lint-js": "eslint plugin",
-    "prepare": "babel -d build/ plugin/"
+    "prepare": "npm test && babel -d build/ plugin/"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/build/"
+    ]
   },
   "dependencies": {
     "graphql-import": "0.1.9",

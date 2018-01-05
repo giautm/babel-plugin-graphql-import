@@ -8,6 +8,8 @@ export default class BabelGraphQLImportHelper {
     '.gql',
   ];
 
+  static root = global.rootPath || process.cwd();
+
   static shouldBeInlined(givenPath, extensions) {
     const accept = (typeof extensions === 'string')
       ? [extensions]
@@ -34,5 +36,24 @@ export default class BabelGraphQLImportHelper {
     }
 
     return importSchema(mod.src);
+  }
+
+  static transformRelativeToRootPath(path, rootPathSuffix) {
+    if (this.hasRoot(path)) {
+      const withoutRoot = path.substring(1, path.length);
+      return `${BabelGraphQLImportHelper.root}${rootPathSuffix || ''}/${withoutRoot}`;
+    }
+    if (typeof path === 'string') {
+      return path;
+    }
+    throw new Error('ERROR: No path passed');
+  }
+
+  static hasRoot(string) {
+    if (typeof string !== 'string') {
+      return false;
+    }
+
+    return string.substring(0, 1) === '/';
   }
 }

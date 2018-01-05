@@ -33,7 +33,7 @@ describe('Babel GraphQL Import - Plugin', () => {
           filename: __filename,
           plugins: [BabelGraphQLImportPlugin]
         });
-      }).toThrowError(Error);
+      }).toThrow(Error);
     });
   });
 });
