@@ -38,11 +38,11 @@
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
-    "babel-eslint": "6.1.2",
+    "babel-eslint": "8.1.2",
     "babel-jest": "22.0.4",
     "babel-preset-es2015-without-strict": "0.0.4",
     "babel-preset-stage-1": "6.24.1",
-    "eslint": "3.19.0",
+    "eslint": "4.14.0",
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jest": "21.5.0",
