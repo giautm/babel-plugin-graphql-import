@@ -3,25 +3,10 @@ import requireResolve from 'require-resolve';
 import { importSchema } from 'graphql-import';
 
 export default class BabelGraphQLImportHelper {
-  static extensions = [
-    '.graphql',
-    '.gql',
-  ];
-
   static root = global.rootPath || process.cwd();
 
-  static shouldBeInlined(givenPath, extensions) {
-    const accept = (typeof extensions === 'string')
-      ? [extensions]
-      : (extensions || BabelGraphQLImportHelper.extensions);
-
-    for (const extension of accept) {
-      if (givenPath.endsWith(extension)) {
-        return true;
-      }
-    }
-
-    return false;
+  static shouldBeInlined(givenPath) {
+    return givenPath.endsWith('.graphql');
   }
 
   static getContents(givenPath, reference) {

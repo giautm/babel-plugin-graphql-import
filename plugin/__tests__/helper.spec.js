@@ -3,13 +3,6 @@ import BabelGraphQLImportHelper from '../helper';
 describe('Babel GraphQL Import - Helper', () => {
 
   describe('Class', () => {
-    it('returns the default extensions', () => {
-      expect(BabelGraphQLImportHelper.extensions).toEqual([
-        '.graphql',
-        '.gql',
-      ]);
-    });
-
     it('returns the root path', () => {
       const rootByProcess = process.cwd();
       expect(BabelGraphQLImportHelper.root).toBe(rootByProcess);
@@ -18,29 +11,13 @@ describe('Babel GraphQL Import - Helper', () => {
 
   describe('shouldBeInlined', () => {
       it('accepts a default extension', () => {
-        const shouldIt = BabelGraphQLImportHelper.shouldBeInlined('example.gql');
+        const shouldIt = BabelGraphQLImportHelper.shouldBeInlined('example.graphql');
         expect(shouldIt).toBe(true);
       });
 
       it('rejects a non default extension', () => {
         const shouldIt = BabelGraphQLImportHelper.shouldBeInlined('example.js');
         expect(shouldIt).toBe(false);
-      });
-
-      it('accepts a user defined extension', () => {
-        const shouldIt = BabelGraphQLImportHelper.shouldBeInlined('example.python', ['.python']);
-        expect(shouldIt).toBe(true);
-      });
-
-      it('rejects a non user defined extension', () => {
-        const shouldIt = BabelGraphQLImportHelper.shouldBeInlined('example.raw', ['.python']);
-        expect(shouldIt).toBe(false);
-      });
-
-      it('throws error if no array or string is passed as extensions', () => {
-        expect(() => {
-          BabelGraphQLImportHelper.shouldBeInlined('example.raw', true);
-        }).toThrow(Error);
       });
   });
 

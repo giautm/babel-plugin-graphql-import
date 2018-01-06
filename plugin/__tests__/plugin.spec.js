@@ -12,21 +12,6 @@ describe('Babel GraphQL Import - Plugin', () => {
       expect(transformedCode.code).toMatchSnapshot();
     });
 
-    it('accepts different extensions', () => {
-      const transformedCode = babel.transform("import SomeExample from './fixtures/example.gql-v2';", {
-        filename: __filename,
-        plugins: [[
-          BabelGraphQLImportPlugin, {
-            extensions: [
-              '.gql-v2'
-            ]
-          }
-        ]]
-      });
-
-      expect(transformedCode.code).toMatchSnapshot();
-    });
-
     it('throws error when importing with destructuring', () => {
       expect(() => {
         babel.transform("import { SomeExample, AnotherExample } from './fixtures/example.graphql';", {
