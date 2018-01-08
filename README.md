@@ -1,6 +1,5 @@
 # Babel GraphQL Import
-Babel plugin to add the opportunity to use `import` with raw/literal content<br>
-It is good e.g. for importing `*.graphql` files into your code.
+Babel plugin to add the opportunity to use `import` for importing `*.graphql` files into your code with `graphql-import`.
 
 ## Examples
 
@@ -66,30 +65,9 @@ or pass the plugin with the plugins-flag on CLI
 babel-node myfile.js --plugins babel-plugin-graphql-import
 ```
 
-By default, Babel-GraphQL-Import is compatible with the following file extensions:
-
-* .graphql
-* .gql
-
-
-## Customize
-If you want to enable different file extensions, you can define them in your `.babelrc` file
-```javascript
-{
-  "plugins": [
-    ["babel-plugin-graphql-import", {
-      "extensions": [
-        ".json",
-        ".sql"
-      ]
-    }]
-  ]
-}
-```
-
 ## How it works
 
-It inserts the __content__ of the _imported file_ directly into the _importing file_, assigning it to a variable with the same identifier of the _import statement_, thus replacing the _import statement_ and the _file path_ by its resulting raw content (no parsing occurs).
+It inserts the __content__ of the _imported file_ by using `importSchema` from _graphq-import_ into the _importing file_, assigning it to a variable with the same identifier of the _import statement_, thus replacing the _import statement_ and the _file path_ by its resulting content from `importSchema`.
 
 ## Caveats
 
@@ -97,9 +75,3 @@ Babel does not track dependency between _imported_ and _importing_ files after t
 
 * If you are using `babel-node` or `babel-register`, you can [disable babel cache (`BABEL_DISABLE_CACHE=1`)](https://babeljs.io/docs/usage/babel-register/#environment-variables-babel-disable-cache).
 * If you are using webpack with `babel-loader`, you can use [babel-inline-import-loader](https://github.com/elliottsj/babel-inline-import-loader).
-
-Also make sure that your task runner is watching for changes in the _imported file_ as well. You can see it working [here](https://github.com/Quadric/perfect-graphql-starter/blob/master/nodemon.json).
-
-
-## Motivate
-If you like this project just give it a star :) I like stars.
